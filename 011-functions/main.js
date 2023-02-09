@@ -1,14 +1,9 @@
 //funcations are fun
 
 function square (x) {
-
-return x * x
-    
-   // console.log(`This divided ${a / b}`)
-   // console.log(`This is x  ${a * b}`)
-   // console.log(`This is the - ${a - b}`)
-  //  console.log(`This is the + ${a + b}`)   
+return x * x     
 }
+
 
 function isEven(n){
     return n % 2 === 0
@@ -25,6 +20,9 @@ function isOddOrEven(n){
         return 'odd'
     }
 }
+
+doMoreMath = (a,b) => a * b 
+divide = (a,b) => a / b
 
 
 ////////////////////square return/////////////
@@ -44,4 +42,9 @@ console.log(`this is not odd number ${odd}`)
 //let result1 = isOddOrEven(7)
 const result1 = isOddOrEven(7)
 console.log(`the number is ${result1}`)
+///////moreMath//////////
+console.log(doMoreMath(20,30))
+//////////divid///////
+console.log(divide(400,8))
+
 
