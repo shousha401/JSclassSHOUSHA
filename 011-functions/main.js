@@ -23,6 +23,9 @@ function isOddOrEven(n){
 
 doMoreMath = (a,b) => a * b 
 divide = (a,b) => a / b
+max = (a,b) => {
+    return a > b ? a : b
+}
 
 
 ////////////////////square return/////////////
@@ -46,5 +49,8 @@ console.log(`the number is ${result1}`)
 console.log(doMoreMath(20,30))
 //////////divid///////
 console.log(divide(400,8))
+////////////max//////
+console.log(max(9,3))
+
 
 
