@@ -8,8 +8,10 @@ const updateDom = (input) => {
     
 }
 
-const milage = (miles, gallons, price = 3.79) => miles/gallons * price
-
-
-updateDom(milage(300,10,5.40))
-
+const milage = (miles, gallons, price = 3.79, currency = '$', precision = 2) => {
+    const cost = (miles / gallons * price).toFixed(precision)
+    return `${currency}${cost}`
+  };
+  
+  updateDom(milage(300, 10, 5.4))
+  
