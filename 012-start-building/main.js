@@ -9,12 +9,13 @@ const updateDom = (input) => {
     
 }
 
-const trackMPGCost = (miles, gallons, price = 3.79, currency = '$', precision = 2) => {
-    const MPG = (miles / gallons * price).toFixed(precision)
+const trackMPGCost = (miles, gallons, price = 3.79) => {
+    const MPG = Math.round (miles / gallons * price)
     const tripCoast = gallons * price
+    updateDom(`Milage per gallon ${MPG} cost ${tripCoast}`)
     myArr.push(MPG,tripCoast)
   };
   
-  updateDom(trackMPGCost(300, 10, 5.4))
-  updateDom(trackMPGCost(300, 10, 5))
-  
+  trackMPGCost(300, 10, 5.4)
+  trackMPGCost(300, 10, 5)
+  updateDom(myArr)
