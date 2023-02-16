@@ -1,4 +1,5 @@
 // update the dom
+const myArr = []
 
 const updateDom = (input) => {
     const divEl = document.querySelector(`#output`)
@@ -8,10 +9,12 @@ const updateDom = (input) => {
     
 }
 
-const milage = (miles, gallons, price = 3.79, currency = '$', precision = 2) => {
-    const cost = (miles / gallons * price).toFixed(precision)
-    return `${currency}${cost}`
+const trackMPGCost = (miles, gallons, price = 3.79, currency = '$', precision = 2) => {
+    const MPG = (miles / gallons * price).toFixed(precision)
+    const tripCoast = gallons * price
+    myArr.push(MPG,tripCoast)
   };
   
-  updateDom(milage(300, 10, 5.4))
+  updateDom(trackMPGCost(300, 10, 5.4))
+  updateDom(trackMPGCost(300, 10, 5))
   
