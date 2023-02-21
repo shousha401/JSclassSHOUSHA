@@ -1,6 +1,4 @@
 // update the dom
-const myMPG = []
-const myTripCost = []
 
 const updateDom = (input) => {
     const divEl = document.querySelector(`#output`)
@@ -11,10 +9,10 @@ const updateDom = (input) => {
 }
 
 const trackMPGandCost = (miles, gallons, price = 3.79) => {
-    const MPG = Math.round (miles / gallons * price)
+   const MPG = Math.round (miles / gallons * price)
     const tripCoast = Math.round (gallons * price)
     updateDom(`Milage per gallon ${MPG} cost ${tripCoast}`)
-    myMPG.push(MPG)
+   myMPG.push(MPG)
     myTripCost.push(tripCoast)
   }
 
@@ -28,14 +26,26 @@ const trackMPGandCost = (miles, gallons, price = 3.79) => {
   }
   //////////////////////////////////////////////////////////
 
-  const calculateAvgCoast = () => {
-    let totalCoast = 0
-    for (let i=0; i < myTripCost.length;i++){
-        totalCoast = totalCoast + myTripCost[i]
-    }
-    let avgCoast = Math.round(totalCoast/myTripCost.length)
-    updateDom(`avvg cost is ${avgCoast}`)
+ // const calculateAvgCoast = () => {
+   // let totalCoast = 0
+  //  for (let i=0; i < myTripCost.length;i++){
+  //      totalCoast = totalCoast + myTripCost[i]
+  //  }
+  //  let avgCoast = Math.round(totalCoast/myTripCost.length)
+  //  updateDom(`avvg cost is ${avgCoast}`)
        
+  //}
+  const calculateAvg = ()=>{
+    let sumMPG=0
+    let sumTripCoast=0
+    for(let i=0; i<myMPG.length;i++){
+        sumMPG=sumMPG+myMPG[i]
+        sumTripCoast=sumTripCoast+myTripCos[i]
+    }
+    let avgMPG=sumMPG/myMPG.length
+    let avgTripCost=sumTripCoast/myTripCost.length
+    updateDom (`avergae MPG is ${avgMPG}`)
+    updateDom (`avergae TRIP is ${avgTripCost}`)
   }
 
 
