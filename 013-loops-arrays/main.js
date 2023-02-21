@@ -1,4 +1,7 @@
 // update the dom
+const MY_MPG=[]
+const MY_TRIP_COST= []
+
 
 const updateDom = (input) => {
     const divEl = document.querySelector(`#output`)
@@ -12,38 +15,49 @@ const trackMPGandCost = (miles, gallons, price = 3.79) => {
    const MPG = Math.round (miles / gallons * price)
     const tripCoast = Math.round (gallons * price)
     updateDom(`Milage per gallon ${MPG} cost ${tripCoast}`)
-   myMPG.push(MPG)
-    myTripCost.push(tripCoast)
+   MY_MPG.push(MPG)
+    MY_TRIP_COST.push(tripCoast)
   }
 
   const calculateMPGAvg = () => {
    let totalMPG = 0
-    for (let i = 0; i < myMPG.length; i++){
-       totalMPG = totalMPG + myMPG[i]
+    for (let i = 0; i < MY_MPG.length; i++){
+       totalMPG = totalMPG + MY_MPG[i]
     }
-    let avgMPG = Math.round(totalMPG/myMPG.length)
+    let avgMPG = Math.round(totalMPG/MY_MPG.length)
     updateDom(`avg mps is ${avgMPG}`)
   }
   //////////////////////////////////////////////////////////
 
  // const calculateAvgCoast = () => {
    // let totalCoast = 0
-  //  for (let i=0; i < myTripCost.length;i++){
-  //      totalCoast = totalCoast + myTripCost[i]
+  //  for (let i=0; i < MY_TRIP_COST.length;i++){
+  //      totalCoast = totalCoast + MY_TRIP_COST[i]
   //  }
-  //  let avgCoast = Math.round(totalCoast/myTripCost.length)
+  //  let avgCoast = Math.round(totalCoast/MY_TRIP_COST.length)
   //  updateDom(`avvg cost is ${avgCoast}`)
        
   //}
-  const calculateAvg = ()=>{
-    let sumMPG=0
-    let sumTripCoast=0
-    for(let i=0; i<myMPG.length;i++){
-        sumMPG=sumMPG+myMPG[i]
-        sumTripCoast=sumTripCoast+myTripCos[i]
+
+  const calculateSUM = (arr) => {
+    let sum=0
+    for(let i=0; i < arr.length;i++){
+    sum = sum + arr[i]
     }
-    let avgMPG=sumMPG/myMPG.length
-    let avgTripCost=sumTripCoast/myTripCost.length
+    return sum
+  }
+
+
+
+
+
+
+
+  const calculateAvg = ()=>{
+    let sumMPG= calculateSUM(MY_MPG)
+    let sumTripCoast=calculateSUM(MY_TRIP_COST)
+    let avgMPG=sumMPG/MY_MPG.length
+    let avgTripCost=sumTripCoast/MY_TRIP_COST.length
     updateDom (`avergae MPG is ${avgMPG}`)
     updateDom (`avergae TRIP is ${avgTripCost}`)
   }
@@ -63,4 +77,4 @@ const trackMPGandCost = (miles, gallons, price = 3.79) => {
   trackMPGandCost(390, 11, 9)
   
   calculateMPGAvg()
-  calculateAvgCoast()
+  calculateAvg()
