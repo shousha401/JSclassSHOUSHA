@@ -1,0 +1,9 @@
+form{
+    /* center the form*/
+    margin:0 auto;
+    width: 600px;
+ /*form outline */
+    padding: 1em;
+    border:1px soild red;
+    border-radius:1em;
+}
