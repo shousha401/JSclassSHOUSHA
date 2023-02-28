@@ -1,10 +1,12 @@
-// update the dom
+
+const FORM = document.getElementById('form-input')
+
 const MY_MPG=[]
 const MY_TRIP_COST= []
 
 
 const updateDom = (input) => {
-    const divEl = document.querySelector(`#output`)
+    const divEl = document.querySelector('#output')
     const p = document.createElement('p')
     p.textContent = input
     divEl.appendChild(p)
@@ -40,19 +42,10 @@ const trackMPGandCost = (miles, gallons, price = 3.79) => {
   //}
 
   const calculateSUM = (arr) => {
-    let sum=0
-    //for(let i=0; i < arr.length;i++){
-   // sum = sum + arr[i]
-   // }
-  // arr.forEach(element => {
-  // sum += element
- //  })
-
-    for(value of arr){
+    let sum = 0
+    for(value of arr) {
         sum += value
     }
-
-
     return sum
   }
 
@@ -70,20 +63,23 @@ const trackMPGandCost = (miles, gallons, price = 3.79) => {
     updateDom (`avergae MPG is ${avgMPG}`)
     updateDom (`avergae TRIP is ${avgTripCost}`)
   }
-
+  
+FORM.addEventListener('submit',(e)=>{
+  console.log(e)
+} )
 
   // calculateAvgCoast
   // git flow my code for avreagecoast
-  trackMPGandCost(300, 10, 5.4)
-  trackMPGandCost(400, 6, 5)
-  trackMPGandCost(200, 5, 4)
-  trackMPGandCost(150, 9, 4)
-  trackMPGandCost(270, 4, 3)
-  trackMPGandCost(180, 4, 6)
-  trackMPGandCost(432, 6, 4)
-  trackMPGandCost(210, 4, 2)
-  trackMPGandCost(121, 3, 5)
-  trackMPGandCost(390, 11, 9)
+  //trackMPGandCost(300, 10, 5.4)
+  //trackMPGandCost(400, 6, 5)
+  //trackMPGandCost(200, 5, 4)
+ // trackMPGandCost(150, 9, 4)
+ // trackMPGandCost(270, 4, 3)
+  //trackMPGandCost(180, 4, 6)
+  //trackMPGandCost(432, 6, 4)
+  //trackMPGandCost(210, 4, 2)
+  //trackMPGandCost(121, 3, 5)
+  //trackMPGandCost(390, 11, 9)
   
-  calculateMPGAvg()
-  calculateAvg()
+  //calculateMPGAvg()
+  //calculateAvg()

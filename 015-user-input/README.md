@@ -1,0 +1,1 @@
+SO now we need to connect the input the user enter with our function and now we have all the input in event E so i m assuming we gonna call the function and add e between the bracket not very sure :D 
