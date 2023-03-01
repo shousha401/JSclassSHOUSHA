@@ -6,17 +6,29 @@ const myArr = []
 //console.log(myArr === myObj)
 const myNumber = 9
 const myObj= {
-    name: 'Rio',
-    age: 59,
-    hobbies: ['coding', 'running', 'workout'],
+    name: 'eslam',
+    age: 31 ,
+    hobbies: ['coding', 'traveling', 'sleep'],
+    isEgyptain: true,
     mobile: {
-        make:'pixel7',
-        OS: 'andriod',
+        make:'promax13',
+        OS: 'ios',
 
     },
     myGreeting: function(person){
-        return `What is Up ${person}`
-    }
+    console.log(`Hello Ms Rio This is ${this.name} and I am ${this.age}`)
+    },
+    
+    calculateSum: function(num1,num2){
+        return num1 + num2
+    },
 }
-const greeting = myObj.myGreeting('me')
-console.log(greeting)
+
+
+
+console.log(myObj.name)
+console.log(myObj.age)
+console.log(myObj.hobbies[2])
+myObj.myGreeting()
+console.log(myObj.calculateSum(18, 4))
+
