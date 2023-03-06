@@ -85,5 +85,6 @@ if(price>1000){
     trackMPGandCost(miles, gallons, price)
     calculateAvg()
   }
+  FORM.reset()
   
 } )
