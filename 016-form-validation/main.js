@@ -70,13 +70,20 @@ FORM.addEventListener('submit',(e)=>{
   const miles = parseInt(e.target.miles.value)
   const gallons = parseInt(e.target.gallons.value)
   const price = parseInt(e.target.price.value)
-  if(miles === 0) {
-   errMsg.push('make sure you value is greater than 0 ')
+  if(miles === 0 || gallons===0|| price===0 ) {
+   errMsg.push('make sure you value is greater than 0')
   } 
+if(price>1000){
+  errMsg.push('Really get it togther\n')
+}
+
   if(errMsg.length>0) {
- ERR.textContent = errMsg
+    
+ ERR.textContent = errMsg.join('\n') // break line
   }else {
+    ERR.textContent = ''
     trackMPGandCost(miles, gallons, price)
+    calculateAvg()
   }
   
 } )
