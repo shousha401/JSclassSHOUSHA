@@ -21,8 +21,8 @@ const myArrObjs = [
          
         ]
 
-        myArrObjs.forEach(obj => {
-            const str = `${obj.name} has ${obj.hairColor} hair color `
-            updateDOM(str,'output')
-
-        })
+       for ( let i=0; i <myArrObjs.length; i++){
+        const obj = myArrObjs[i]
+        const str = `${obj.name} has ${obj.hairColor} hair color. `
+        updateDOM(str,"output")
+       }
