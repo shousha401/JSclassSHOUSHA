@@ -76,6 +76,17 @@ function renderTable () {
   console.log(tr)
   tbl.appendChild(tr)
   TBL_OUTPUT.appendChild(tbl)
+  MY_DATA.forEach(function(obj){
+    const tr = document.createElement('tr')
+    for(key in obj){
+      let td = document.createElement('td')
+      td.textContent = obj[key]
+      tr.appendChild(td)
+      
+    }
+    tbl.appendChild(tr)
+  })
+  
 }
 
 
@@ -89,7 +100,7 @@ FORM.addEventListener('submit', (e) => {
         ERR.textContent = ''
         AVG_OUTPUT.textContent = ''
         const dataObj = trackMPGandCost(miles, gallons, price)
-       
+        MY_DATA.push(dataObj)
         renderTable()
         calculateAvg()
     }
