@@ -1,9 +1,12 @@
+/* Global const for updating DOM elements by their id*/
+
 const FORM = document.getElementById('form-input')
 const ERR = document.getElementById('err')
 const AVG_OUTPUT = document.getElementById('output-avg')
 const TBL_OUTPUT = document.getElementById('table-out')
 
-
+/* MY_DATA is global array that will be updated by the user input with objects from form input values 
+and calculate data */
 
 function getTripData() {
     const tripDataJSON = localStorage.getItem('tripdata')
@@ -12,6 +15,8 @@ function getTripData() {
 
 const MY_DATA = getTripData()
 
+/* updateDOM function takes in input (string value) and id (to determine DOM location to update) 
+and creates and updates DOM elements*/
 
 function updateDOM (input, id) {
     const divEl = document.querySelector(id)
@@ -19,6 +24,9 @@ function updateDOM (input, id) {
     p.textContent = input
     divEl.appendChild(p)
 }
+
+/* trackMPGandCost function takes in miles, gallons and price and calculates MPG and tripCost and 
+returns an object */
 
 function trackMPGandCost (miles, gallons, price) {
     const MPG  = Math.round(miles/gallons)
@@ -33,6 +41,8 @@ function trackMPGandCost (miles, gallons, price) {
     }
 }
 
+/* calculateAvg function loops over the MY_DATA to determine average MPG and Trip Cost
+*/
 
 function calculateAvg () {
     const numberOfObj = MY_DATA.length
@@ -48,6 +58,8 @@ function calculateAvg () {
     updateDOM(`Average Trip Cost is ${avgTripCost}`, '#output-avg')
 }
 
+/* isFormValid takes in miles, gallons and price and does simple validation and 
+returns boolean or truthy value back to eventlisteners */
 
 function isFormValid (miles, gallons, price) {
     const errMsg = []
@@ -63,48 +75,57 @@ function isFormValid (miles, gallons, price) {
         return true
     }
 }
+/* renderTableHeadings create the DOM structure of the table and loops over an array of heading strings 
+to create the th (heading) for the table output */
 
 function renderTableHeadings () {
-  const tbl = document.createElement('table')
-  const headings = ['Miles Driven:','Gallons Used:','Price Paid:','Trip MPG','Trip Cost','Edit/Delete']
-  const tr = document.createElement('tr')
-  headings.forEach(function(heading){
-      let th = document.createElement('th')
-      th.textContent = heading
-      tr.appendChild(th)
-  })
-  tbl.appendChild(tr)
-  return tbl
+    const tbl = document.createElement('table')
+    const headings = ['Miles Driven:','Gallons Used:','Price Paid:','Trip MPG','Trip Cost','Edit/Delete']
+    const tr = document.createElement('tr')
+    headings.forEach(function(heading){
+        let th = document.createElement('th')
+        th.textContent = heading
+        tr.appendChild(th)
+    })
+    tbl.appendChild(tr)
+    return tbl
 }
 
+/* renderEditDelBtn the DOM creation of the buttons for handling edit and delete functionality in the table */
 
-function renderTable () {
-  const tbl = renderTableHeadings()
-  TBL_OUTPUT.appendChild(tbl)
-  MY_DATA.forEach(function(obj){
-    const tr = document.createElement('tr')
-    for(key in obj){
-      let td = document.createElement('td')
-      td.textContent = obj[key]
-      tr.appendChild(td)
-
-    }
-    const btnTD = document.createElement('td')
+function renderEditDelBtn () {
+    const td = document.createElement('td')
     const editBtn = document.createElement('button')
     editBtn.textContent = 'edit'
     const delBtn = document.createElement('button')
-    delBtn.textContent ='delete'
-    btnTD.appendChild(editBtn)
-    btnTD.appendChild(delBtn)
-    tr.appendChild(btnTD)
-    tbl.appendChild(tr)
-    
-   
-  })
-  
+    delBtn.textContent = 'delete'
+    td.appendChild(editBtn)
+    td.appendChild(delBtn)
+    return td
 }
 
+/* renderTable hands the render the DOM for the array of object (MY_DATA)  */
 
+function renderTable() {
+    TBL_OUTPUT.innerHTML = ''
+    const tbl = renderTableHeadings()
+    TBL_OUTPUT.appendChild(tbl)
+    MY_DATA.forEach(function(obj){
+        const tr = document.createElement('tr')
+        for(key in obj){
+            let td = document.createElement('td')
+            td.textContent = obj[key]
+            tr.appendChild(td)
+        }
+        const btnTD = renderEditDelBtn()
+        tr.appendChild(btnTD)
+        tbl.appendChild(tr)
+    })
+    
+}
+
+/* Eventlisteners for form submit button, checks validation and if valid saves input data and calculated 
+data as an object into global array named MY_DATA */
 
 FORM.addEventListener('submit', (e) => {
     e.preventDefault()
