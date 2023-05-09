@@ -1,2 +1,1 @@
-* (JavaScript Object Notation) is a lightweight data interchange format that is easy for humans to read and write and easy for machines to parse and generate. It is based on a subset of the JavaScript programming language
-*  JSON is important because it provides a standardized way to represent and exchange data. It allows data to be easily serialized and deserialized into a format that can be easily transferred over the network.
+* now its very clear how we store data thank you so much :)

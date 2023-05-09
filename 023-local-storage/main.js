@@ -110,6 +110,7 @@ function renderEditDelBtn(index) {
     })
     delBtn.addEventListener('click', function(e){
         MY_DATA.splice(index, 1)
+        saveTripData()
         renderTable()
     })
     
@@ -154,6 +155,7 @@ FORM.addEventListener('submit', (e) => {
         AVG_OUTPUT.textContent = '';
         const dataObj = trackMPGandCost(miles, gallons, price);
         MY_DATA.push(dataObj);
+        saveTripData()
         renderTable();
         calculateAvg();
     }
