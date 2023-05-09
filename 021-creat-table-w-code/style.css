@@ -1,19 +1,18 @@
 
 .centered {
-     /* center the form*/
-     margin:0 auto;
-     width: 700px;
-  /*form outline */
-     padding: 1em;
-     border:1px solid #cccccc;
-     border-radius:1em;
+    /* Center the form on the page */
+    margin: 0 auto;
+    width: 700px;
+    /* Form outline */
+    padding: 1em;
+    border: 1px solid #ccc;
+    border-radius: 1em;
+}  
 
-}
-
-.error{
+.error {
     color: red;
-    white-space: pre-line;
 }
+
 table, th, td {
     border: 1px solid blue;
     padding: 8px
