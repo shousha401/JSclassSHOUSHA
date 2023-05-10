@@ -1,3 +1,5 @@
+import { saveTripData } from "./storage.js";
+
 const FORM = document.getElementById('form-input');
 
 const TBL_OUTPUT = document.getElementById('table-out');
@@ -32,8 +34,8 @@ function renderEditDelBtn(MY_DATA, index) {
     })
     delBtn.addEventListener('click', function(e){
         MY_DATA.splice(index, 1)
-        saveTripData()
-        renderTable()
+        saveTripData(MY_DATA)
+        renderTable(MY_DATA)
     })
     
     td.appendChild(editBtn);
