@@ -1,5 +1,6 @@
 const ERR = document.getElementById('err');
 
+
 function updateDOM(input, id) {
     const divEl = document.querySelector(id);
     const p = document.createElement('p');
@@ -7,9 +8,11 @@ function updateDOM(input, id) {
     divEl.appendChild(p);
 }
 
+
+
 function trackMPGandCost(miles, gallons, price) {
-    const MPG = Math.round(miles / gallons);
-    const tripCost = Math.round(gallons * price);
+    const MPG = Number((miles / gallons).toFixed(2));
+    const tripCost = Number((gallons * price).toFixed(2));
     
     return {
         miles: miles,
@@ -20,7 +23,9 @@ function trackMPGandCost(miles, gallons, price) {
     };
 }
 
-function calculateAvg() {
+
+
+function calculateAvg(MY_DATA) {
     const numberOfObj = MY_DATA.length;
     let sumMPG = 0;
     let sumTripCost = 0;
@@ -28,11 +33,12 @@ function calculateAvg() {
         sumMPG += obj.MPG;
         sumTripCost += obj.tripCost;
     });
-    const avgMPG = Math.round(sumMPG / numberOfObj);
-    const avgTripCost = Math.round(sumTripCost / numberOfObj);
+    const avgMPG = Number((sumMPG / numberOfObj).toFixed(2));
+    const avgTripCost = Number((sumTripCost / numberOfObj).toFixed(2));
     updateDOM(`Average MPG is ${avgMPG}`, '#output-avg');
     updateDOM(`Average Trip Cost is ${avgTripCost}`, '#output-avg');
 }
+
 
 function isFormValid(miles, gallons, price) {
     const errMsg = [];

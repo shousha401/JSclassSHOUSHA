@@ -1,5 +1,5 @@
 
-import {renderTable} from "./render.js";
+import { renderTable} from "./render.js";
 import { getTripData, saveTripData } from "./storage.js";
 import { isFormValid, calculateAvg, trackMPGandCost } from "./app.js"
 
@@ -10,8 +10,11 @@ const AVG_OUTPUT = document.getElementById('output-avg');
 
 
 
+
 const MY_DATA = getTripData()
+
 renderTable(MY_DATA)
+
 
 
 
@@ -26,9 +29,9 @@ FORM.addEventListener('submit', (e) => {
         AVG_OUTPUT.textContent = '';
         const dataObj = trackMPGandCost(miles, gallons, price);
         MY_DATA.push(dataObj);
-        saveTripData()
+        saveTripData(MY_DATA)
         renderTable(MY_DATA, FORM);
-        calculateAvg();
+        calculateAvg(MY_DATA);
     }
     FORM.reset();
 });

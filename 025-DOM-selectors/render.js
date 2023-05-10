@@ -1,8 +1,8 @@
 import { saveTripData } from "./storage.js";
-
 const FORM = document.getElementById('form-input');
-
 const TBL_OUTPUT = document.getElementById('table-out');
+
+
 
 function renderTableHeadings() {
     const tbl = document.createElement('table');
@@ -25,19 +25,24 @@ function renderEditDelBtn(MY_DATA, index) {
     editBtn.textContent = 'edit';
     const delBtn = document.createElement('button');
     delBtn.textContent = 'delete';
-    
     editBtn.addEventListener('click', function(e){
         FORM[0].value = MY_DATA[index].miles
         FORM[1].value = MY_DATA[index].gallons
         FORM[2].value = MY_DATA[index].price
         MY_DATA.splice(index, 1)
+        const disable_btns = document.querySelectorAll('.tbl-btn')
+        disable_btns.forEach(function(btn){
+            btn.setAttribute('disabled', true)
+        })
     })
     delBtn.addEventListener('click', function(e){
         MY_DATA.splice(index, 1)
         saveTripData(MY_DATA)
         renderTable(MY_DATA)
     })
-    
+    editBtn.classList.add('tbl-btn')
+    delBtn.classList.add('tbl-btn')
+
     td.appendChild(editBtn);
     td.appendChild(delBtn);
     return td;
@@ -52,7 +57,7 @@ function renderTable(MY_DATA) {
         TBL_OUTPUT.appendChild(tbl);
         MY_DATA.forEach(function (obj, index) {
             const tr = document.createElement('tr');
-            for ( const key in obj) {
+            for (const key in obj) {
                 let td = document.createElement('td');
                 td.textContent = obj[key];
                 tr.appendChild(td);
@@ -62,8 +67,6 @@ function renderTable(MY_DATA) {
             tbl.appendChild(tr);
         });
     }
-   
-
 }
 
 export {renderTable}
