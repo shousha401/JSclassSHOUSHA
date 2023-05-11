@@ -30,3 +30,42 @@ if (isTeenager) {
 } else {
   console.log(`${name} is not a teenager.`);
 }
+
+function processUser(name, age, hasDriverLicense) {
+  let canRentCar = age >= 25 && hasDriverLicense;
+  let isNameMatch = name === "Bob" || name === "Alice";
+  let isTeenager = age >= 13 && age <= 19;
+
+  return {
+    name: name,
+    age: age,
+    hasDriverLicense: hasDriverLicense,
+    decision: [canRentCar, isNameMatch, isTeenager]
+  };
+}
+
+function updateDOM(userData) {
+  let outputElement = document.getElementById("output");
+
+  // Clear previous content
+  outputElement.innerHTML = "";
+
+  // Create a paragraph element for each piece of data
+  for (let key in userData) {
+    let dataElement = document.createElement("p");
+    dataElement.textContent = `${key}: ${userData[key]}`;
+    outputElement.appendChild(dataElement);
+  }
+}
+
+document.getElementById("userForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  let name = document.getElementById("name").value;
+  let age = document.getElementById("age").value;
+  let hasDriverLicense = document.getElementById("hasDriverLicense").checked;
+
+  let userData = processUser(name, age, hasDriverLicense);
+  updateDOM(userData);
+});
+
