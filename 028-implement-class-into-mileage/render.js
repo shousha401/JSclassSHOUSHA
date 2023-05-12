@@ -1,5 +1,6 @@
 import { saveTripData } from "./storage.js";
 import { calculateAvg } from "./handleinput.js";
+
 const FORM = document.getElementById('form-input');
 const TBL_OUTPUT = document.getElementById('table-out');
 
@@ -28,9 +29,9 @@ function renderEditDelBtn(MY_DATA, index) {
     const delBtn = document.createElement('button');
     delBtn.textContent = 'delete';
     editBtn.addEventListener('click', function(e){
-        FORM[0].value = MY_DATA[index].miles
-        FORM[1].value = MY_DATA[index].gallons
-        FORM[2].value = MY_DATA[index].price
+        FORM[0].value = MY_DATA[index]._miles
+        FORM[1].value = MY_DATA[index]._gallons
+        FORM[2].value = MY_DATA[index]._price
         MY_DATA.splice(index, 1)
         const disable_btns = document.querySelectorAll('.tbl-btn')
         disable_btns.forEach(function(btn){
@@ -67,8 +68,9 @@ function renderTable(MY_DATA) {
             tr.appendChild(btnTD);
             tbl.appendChild(tr);
         });
+        calculateAvg(MY_DATA);    
     }
-    calculateAvg(MY_DATA);
+    
 }
 
 export {renderTable}

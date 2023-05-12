@@ -26,3 +26,6 @@ const tracker = new MPGTracker(300, 10, 2.5);
 const result = tracker.trackMPGandCost();
 
 console.log(result);
+
+
+we going to call it in main.js at eventlistener
