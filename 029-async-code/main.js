@@ -1,13 +1,14 @@
+function orderPizza(callback){
+    setTimeout(() => {
+        const pizza = `🍕`
+        callback(pizza)
 
-let pizza
-function orderPizza() {
-    console.log ('Order pizza')
-    setTimeout (()=> {
-        pizza = '🍕'
     }, 2000)
-   
-    console.log ('Pizza was ordered')
-    
 }
-orderPizza()
-console.log (`Eat ${pizza}`)
+
+function pizzaReady(pizza){
+    console.log(`Eat the ${pizza}`)
+
+}
+orderPizza(pizzaReady)
+console.log (`Call Qoli`)
