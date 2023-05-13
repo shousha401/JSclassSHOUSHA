@@ -1,60 +1,43 @@
 
-let name = "Alice";
-let age = 25;
-let hasDriverLicense = true;
-
-// Calculate whether the person is eligible to rent a car
-let canRentCar = age >= 25 && hasDriverLicense;
-
-// Compare the person's name with a specified string
-let isNameMatch = name === "Bob" || name === "Alice";
-
-// Check if the person is a teenager
-let isTeenager = age >= 13 && age <= 19;
-
-// Display the decision output based on the variables
-if (canRentCar) {
-  console.log(`${name} can rent a car.`);
-} else {
-  console.log(`${name} cannot rent a car.`);
-}
-
-if (isNameMatch) {
-  console.log(`The name ${name} matches.`);
-} else {
-  console.log(`The name ${name} does not match.`);
-}
-
-if (isTeenager) {
-  console.log(`${name} is a teenager.`);
-} else {
-  console.log(`${name} is not a teenager.`);
-}
-
 function processUser(name, age, hasDriverLicense) {
-  let canRentCar = age >= 25 && hasDriverLicense;
+  let canRentCar = age >= 21 && hasDriverLicense;
   let isNameMatch = name === "Bob" || name === "Alice";
   let isTeenager = age >= 13 && age <= 19;
+
+  let decisionOutput = "";
+
+  if (canRentCar) {
+    decisionOutput = `${name} can rent a car.`;
+  } else {
+    decisionOutput = `${name} cannot rent a car.`;
+  }
 
   return {
     name: name,
     age: age,
     hasDriverLicense: hasDriverLicense,
-    decision: [canRentCar, isNameMatch, isTeenager]
+    decision: [canRentCar, isNameMatch, isTeenager],
+    decisionOutput: decisionOutput
   };
 }
 
 function updateDOM(userData) {
   let outputElement = document.getElementById("output");
 
-  // Clear previous content
+
   outputElement.innerHTML = "";
 
-  // Create a paragraph element for each piece of data
+  
   for (let key in userData) {
-    let dataElement = document.createElement("p");
-    dataElement.textContent = `${key}: ${userData[key]}`;
-    outputElement.appendChild(dataElement);
+    if (key === "decisionOutput") {
+      let decisionElement = document.createElement("p");
+      decisionElement.textContent = userData[key];
+      outputElement.appendChild(decisionElement);
+    } else {
+      let dataElement = document.createElement("p");
+      dataElement.textContent = `${key}: ${userData[key]}`;
+      outputElement.appendChild(dataElement);
+    }
   }
 }
 
@@ -68,4 +51,3 @@ document.getElementById("userForm").addEventListener("submit", function(event) {
   let userData = processUser(name, age, hasDriverLicense);
   updateDOM(userData);
 });
-
