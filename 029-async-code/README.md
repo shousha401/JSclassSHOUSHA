@@ -1,0 +1,1 @@
+*The callbacks are passed as arguments to thing1, thing2 functions.

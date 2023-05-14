@@ -6,7 +6,7 @@ function thing2 (callback) {
     callback()
 }
 
-function thing3 (callback){
+function thing3 (){
     callback()
 }
 
