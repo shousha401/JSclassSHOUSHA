@@ -1,26 +1,27 @@
-const formEl = document.getElementById('form');
-const output = document.getElementById('output');
+const formEl = document.getElementById('form')
+const output = document.getElementById('output')
+function updateDom(message, el) {
+    const newEl = document.createElement(el)
+    newEl.textContent = message
+    output.appendChild(newEl)
 
-formEl.addEventListener('submit', function(e) {
-  e.preventDefault();
+}
+function startWorkout(type, reps, time, fn) {
+     fn(`start ${type} <> goal reps is ${reps}`, 'p')  
+    setTimeout(()=>{
+        fn(`stop${type}`, 'h1')
 
-  const type = e.target.elements.type.value;
-  const reps = parseFloat(e.target.elements.reps.value);
-  const time = parseFloat(e.target.elements.time.value);
+       }, time * 1000)
 
-  formEl.reset();
 
-  displayExerciseInfo(type, reps, function() {
-    performAsyncUpdate(time);
-  });
-});
-
-function displayExerciseInfo(type, reps, callback) {
-  
-  output.textContent = `Exercise: ${type}, Reps: ${reps}`;
-
-  
-  callback();
 }
 
+formEl.addEventListener('submit', function(e){
+    e.preventDefault();
+    const type = e.target.type.value
+    const reps = parseFloat(e.target.reps.value)
+    const time = parseFloat(e.target.time.value)
+    startWorkout(type, reps, time,updateDom)
+    formEl.reset()
+})
 
