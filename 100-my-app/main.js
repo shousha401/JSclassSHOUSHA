@@ -41,13 +41,30 @@ function updateDOM(userData) {
   }
 }
 
+
 document.getElementById("userForm").addEventListener("submit", function(event) {
   event.preventDefault();
 
+  
   let name = document.getElementById("name").value;
   let age = document.getElementById("age").value;
   let hasDriverLicense = document.getElementById("hasDriverLicense").checked;
 
+ 
+  if (!name || !age) {
+    alert("Please fill in all required fields.");
+    return;
+  }
+
+ 
+  age = parseInt(age);
+
+  
   let userData = processUser(name, age, hasDriverLicense);
+  
   updateDOM(userData);
+
+  document.getElementById("name").value = "";
+  document.getElementById("age").value = "";
+  document.getElementById("hasDriverLicense").checked = false;
 });
