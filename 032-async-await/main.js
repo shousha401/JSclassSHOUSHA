@@ -1,18 +1,38 @@
-
-async function start(){
-    const data = await fetch('https://api.weather.gov/gridpoints/HNX/53,100/forecast')
-    const result = await data.json()
-    console.log(result.properties.periods[1].shortForecast)
-}
-async function start2(){
- fetch('https://api.weather.gov/gridpoints/HNX/53,100/forecast')
-    .then(data=> data.json())
-    .then(result => {
-        console.log(result.properties.periods[1].shortForecast)
-
+function getData(){
+    return new Promise(function(resolve, reject){
+        setTimeout(() => {
+           // resolve('here is ur data')
+           reject('Something went wrong!')
+        }, 1)
     })
-    
+}
+
+function onSuccess() {
+}
+
+function onFailure() {
 }
 
 
-start2()
+
+async function start() {
+    try {
+        const result = await getData()
+        //console.log(`Success: ${result}`)
+       // onSuccess()
+    } catch (error) {
+        //console.log(`Error: ${error}`)
+        //onFailure()
+    }
+}
+
+//async function start2() {
+  // const result = await getData()
+   
+  // .catch(error => {
+  // console.log(`Error: ${error}`)
+  // })
+ // console.log(result)
+   
+//}
+start()
