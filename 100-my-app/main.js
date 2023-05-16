@@ -23,22 +23,31 @@ function processUser(name, age, hasDriverLicense) {
 
 function updateDOM(userData) {
   let outputElement = document.getElementById("output");
-
-
   outputElement.innerHTML = "";
 
   
+  let table = document.createElement("table");
+
   for (let key in userData) {
-    if (key === "decisionOutput") {
-      let decisionElement = document.createElement("p");
-      decisionElement.textContent = userData[key];
-      outputElement.appendChild(decisionElement);
-    } else {
-      let dataElement = document.createElement("p");
-      dataElement.textContent = `${key}: ${userData[key]}`;
-      outputElement.appendChild(dataElement);
-    }
+    
+    let row = document.createElement("tr");
+
+    
+    let keyCell = document.createElement("td");
+    keyCell.textContent = key;
+    row.appendChild(keyCell);
+
+    
+    let valueCell = document.createElement("td");
+    valueCell.textContent = userData[key];
+    row.appendChild(valueCell);
+
+    
+    table.appendChild(row);
   }
+
+  
+  outputElement.appendChild(table);
 }
 
 
@@ -68,3 +77,4 @@ document.getElementById("userForm").addEventListener("submit", function(event) {
   document.getElementById("age").value = "";
   document.getElementById("hasDriverLicense").checked = false;
 });
+
