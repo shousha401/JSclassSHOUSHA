@@ -3,7 +3,6 @@ function processUser(name, age, hasDriverLicense) {
   let canRentCar = age >= 21 && hasDriverLicense;
   let isNameMatch = name === "Bob" || name === "Alice";
   let isTeenager = age >= 13 && age <= 19;
-
   let decisionOutput = "";
 
   if (canRentCar) {
@@ -12,43 +11,43 @@ function processUser(name, age, hasDriverLicense) {
     decisionOutput = `${name} cannot rent a car.`;
   }
 
-  return {
-    name: name,
-    age: age,
-    hasDriverLicense: hasDriverLicense,
-    decision: [canRentCar, isNameMatch, isTeenager],
-    decisionOutput: decisionOutput
-  };
+  return [
+    {
+      name: name,
+      age: age,
+      hasDriverLicense: hasDriverLicense,
+      decision: [canRentCar, isNameMatch, isTeenager],
+      decisionOutput: decisionOutput,
+    },
+  ];
 }
 
 function updateDOM(userData) {
   let outputElement = document.getElementById("output");
   outputElement.innerHTML = "";
 
-  
-  let table = document.createElement("table");
+  for (let user of userData) {
+    let userDiv = document.createElement("div");
+    userDiv.classList.add("user");
 
-  for (let key in userData) {
-    
-    let row = document.createElement("tr");
+    let nameElement = document.createElement("h2");
+    nameElement.textContent = user.name;
+    userDiv.appendChild(nameElement);
 
-    
-    let keyCell = document.createElement("td");
-    keyCell.textContent = key;
-    row.appendChild(keyCell);
+    let ageElement = document.createElement("p");
+    ageElement.textContent = `Age: ${user.age}`;
+    userDiv.appendChild(ageElement);
 
-    
-    let valueCell = document.createElement("td");
-    valueCell.textContent = userData[key];
-    row.appendChild(valueCell);
+    let licenseElement = document.createElement("p");
+    licenseElement.textContent = `Has Driver's License: ${
+      user.hasDriverLicense ? "Yes" : "No"
+    }`;
+    userDiv.appendChild(licenseElement);
 
-    
-    table.appendChild(row);
+    outputElement.appendChild(userDiv);
   }
-
-  
-  outputElement.appendChild(table);
 }
+
 
 
 document.getElementById("userForm").addEventListener("submit", function(event) {
