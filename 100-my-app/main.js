@@ -1,4 +1,32 @@
 
+let userData = [];
+
+// Retrieve userData from local storage, if available
+if (localStorage.getItem('userData')) {
+  userData = JSON.parse(localStorage.getItem('userData'));
+  updateDOM(userData);
+}
+
+function editUser(index) {
+  let user = userData[index];
+  document.getElementById("name").value = user.name;
+  document.getElementById("age").value = user.age;
+  document.getElementById("hasDriverLicense").checked = user.hasDriverLicense;
+  userData.splice(index, 1);
+  updateDOM(userData);
+  saveData();
+}
+
+function deleteUser(index) {
+  userData.splice(index, 1);
+  updateDOM(userData);
+  saveData();
+}
+
+function saveData() {
+  localStorage.setItem('userData', JSON.stringify(userData));
+}
+
 function processUser(name, age, hasDriverLicense) {
   let canRentCar = age >= 21 && hasDriverLicense;
   let isNameMatch = name === "Bob" || name === "Alice";
@@ -11,15 +39,32 @@ function processUser(name, age, hasDriverLicense) {
     decisionOutput = `${name} cannot rent a car.`;
   }
 
-  return [
-    {
-      name: name,
-      age: age,
-      hasDriverLicense: hasDriverLicense,
-      decision: [canRentCar, isNameMatch, isTeenager],
-      decisionOutput: decisionOutput,
-    },
-  ];
+  let user = {
+    name: name,
+    age: age,
+    hasDriverLicense: hasDriverLicense,
+    decision: [canRentCar, isNameMatch, isTeenager],
+    decisionOutput: decisionOutput,
+  };
+
+  let editIndex = -1;
+  for (let i = 0; i < userData.length; i++) {
+    if (userData[i].name === name) {
+      editIndex = i;
+      break;
+    }
+  }
+
+  if (editIndex !== -1) {
+    userData[editIndex] = user;
+  } else {
+    userData.push(user);
+  }
+
+  updateDOM(userData);
+  saveData();
+
+  return [user];
 }
 
 function updateDOM(userData) {
@@ -67,58 +112,40 @@ function updateDOM(userData) {
   }
 }
 
-
-
-let userData = [];
-
-function editUser(index) {
-  let user = userData[index];
-  document.getElementById("name").value = user.name;
-  document.getElementById("age").value = user.age;
-  document.getElementById("hasDriverLicense").checked = user.hasDriverLicense;
-  userData.splice(index, 1);
-  updateDOM(userData);
-}
-
-function deleteUser(index) {
-  userData.splice(index, 1);
-  updateDOM(userData);
-}
-
 document.getElementById("userForm").addEventListener("submit", function (event) {
   event.preventDefault();
 
   let name = document.getElementById("name").value;
   let age = document.getElementById("age").value;
-  let hasDriverLicense = document.getElementById("hasDriverLicense").checked;
+  let hasDriverLicense = document
+  .getElementById("hasDriverLicense").checked;
 
   if (!name || !age) {
-    alert("Please fill in all required fields.");
-    return;
+  alert("Please fill in all required fields.");
+  return;
   }
-
+  
   age = parseInt(age);
-
+  
   let editIndex = -1;
   for (let i = 0; i < userData.length; i++) {
-    if (userData[i].name === name) {
-      editIndex = i;
-      break;
-    }
+  if (userData[i].name === name) {
+  editIndex = i;
+  break;
   }
-
+  }
+  
   if (editIndex !== -1) {
-    userData[editIndex] = processUser(name, age, hasDriverLicense)[0];
+  userData[editIndex] = processUser(name, age, hasDriverLicense)[0];
   } else {
-    let newUser = processUser(name, age, hasDriverLicense)[0];
-    userData.push(newUser);
+  let newUser = processUser(name, age, hasDriverLicense)[0];
+  userData.push(newUser);
   }
-
+  
   updateDOM(userData);
-
+  
   document.getElementById("name").value = "";
   document.getElementById("age").value = "";
   document.getElementById("hasDriverLicense").checked = false;
-});
-
+  });
 
